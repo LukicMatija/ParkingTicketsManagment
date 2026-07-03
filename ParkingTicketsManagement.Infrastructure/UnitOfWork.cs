@@ -20,7 +20,7 @@ namespace ParkingTicketsManagement.Infrastructure
 
         public IAuthRepository Auth =>
             _auth ??= new AuthRepository(_context);
-        public int SaveChanges() => _context.SaveChanges();
+        public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
 
         public void Dispose() => _context.Dispose();
 

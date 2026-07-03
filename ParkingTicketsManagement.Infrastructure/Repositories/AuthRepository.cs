@@ -1,4 +1,5 @@
-﻿using ParkingTicektsManagment.Domain.Domains;
+﻿using Microsoft.EntityFrameworkCore;
+using ParkingTicektsManagment.Domain.Domains;
 using ParkingTicektsManagment.Domain.Repositories;
 using ParkingTicketsManagement.Infrastructure.Data;
 using System;
@@ -13,9 +14,9 @@ namespace ParkingTicketsManagement.Infrastructure.Repositories
         {
         }
 
-        public User? GetByEmail(string Email)
+        public async Task<User?> GetByEmailAsync(string Email)
         {
-            return DbSet.FirstOrDefault(x => x.Email == Email);
+            return await DbSet.FirstOrDefaultAsync(x => x.Email == Email);
         }
     }
 }

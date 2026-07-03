@@ -7,11 +7,11 @@ namespace ParkingTicektsManagment.Domain.Repositories
 {
     public interface IRepository<T> where T : class
     {
-        IEnumerable<T> GetAll();
-        IEnumerable<T> Find(Expression<Func<T, bool>> predicate);
-        T? GetById(params object[] keyValues);
-        void Add(T entity);
-        void Remove(T entity);
-        void Update(T entity);
+        Task<IEnumerable<T>> GetAllAsync();
+        Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
+        Task<T?> GetByIdAsync(params object[] keyValues);
+        Task AddAsync(T entity);
+        Task RemoveAsync(T entity);
+        Task UpdateAsync(T entity);
     }
 }

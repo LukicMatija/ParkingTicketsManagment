@@ -19,18 +19,30 @@ namespace ParkingTicketsManagement.Infrastructure.Repositories
             DbSet = context.Set<T>();
         }
 
-        public IEnumerable<T> GetAll() => DbSet.ToList();
+        public async Task<IEnumerable<T>> GetAllAsync() =>
+            await DbSet.ToListAsync();
 
-        public IEnumerable<T> Find(Expression<Func<T, bool>> predicate) =>
-            DbSet.Where(predicate).ToList();
+        public async Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate) =>
+            await DbSet.Where(predicate).ToListAsync();
 
-        public T? GetById(params object[] keyValues) => DbSet.Find(keyValues);
+        public async Task<T?> GetByIdAsync(params object[] keyValues) =>
+            await DbSet.FindAsync(keyValues);
 
-        public void Add(T entity) => DbSet.Add(entity);
+        public async Task AddAsync(T entity)
+        {
+            await DbSet.AddAsync(entity);
+        }
 
-        public void Remove(T entity) => DbSet.Remove(entity);
+        public async Task RemoveAsync(T entity)
+        {
+            DbSet.Remove(entity);
+            await Task.CompletedTask;
+        }
 
-        public void Update(T entity) => DbSet.Update(entity);
-
+        public async Task UpdateAsync(T entity)
+        {
+            DbSet.Update(entity);
+            await Task.CompletedTask;
+        }
     }
 }

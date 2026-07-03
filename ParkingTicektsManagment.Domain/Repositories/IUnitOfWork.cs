@@ -7,6 +7,6 @@ namespace ParkingTicektsManagment.Domain.Repositories
     public interface IUnitOfWork : IDisposable
     {
         IAuthRepository Auth {  get; }
-        int SaveChanges();
+        Task<int> SaveChangesAsync();
     }
 }

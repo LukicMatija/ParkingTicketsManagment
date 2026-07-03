@@ -24,9 +24,9 @@ namespace ParkingTicketsManagment.Controllers
         }
 
         [HttpPost("register")]
-        public IActionResult Register([FromBody] RegisterDto dto)
+        public async Task<IActionResult> Register([FromBody] RegisterDto dto)
         {
-            var existingUser = _uow.Auth.GetByEmail(dto.Email);
+            var existingUser = await _uow.Auth.GetByEmailAsync(dto.Email);
             if (existingUser != null)
             {
                 return BadRequest(new { message = "Email is already in use." });
@@ -41,16 +41,16 @@ namespace ParkingTicketsManagment.Controllers
                 PasswordHash = passwordHash,
                 Role = Role.User
             };
-            _uow.Auth.Add(newUser);
-            _uow.SaveChanges();
+            await _uow.Auth.AddAsync(newUser);
+            await _uow.SaveChangesAsync();
 
             return Ok(new { message = "Registration successful." });
         }
 
         [HttpPost("login")]
-        public IActionResult Login([FromBody] LoginDto dto)
+        public async Task<IActionResult> Login([FromBody] LoginDto dto)
         {
-            var user = _uow.Auth.GetByEmail(dto.Email);
+            var user = await _uow.Auth.GetByEmailAsync(dto.Email);
             if (user == null)
             {
                 return Unauthorized(new { message = "Invalid email or password." });

@@ -8,6 +8,6 @@ namespace ParkingTicektsManagment.Domain.Repositories
 {
     public interface IAuthRepository : IRepository<User>
     {
-        User? GetByEmail(string Email);
+        Task<User?> GetByEmailAsync(string Email);
     }
 }
