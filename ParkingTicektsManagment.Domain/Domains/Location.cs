@@ -29,4 +29,3 @@ namespace ParkingTicektsManagment.Domain.Domains
         public ICollection<ParkingTicket> ParkingTickets { get; set; } = new List<ParkingTicket>();
     }
 }
-}
