@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ParkingTicektsManagment.Domain.Domains
+namespace ParkingTicketsManagment.Domain.Domains
 {
     public enum Role
     {

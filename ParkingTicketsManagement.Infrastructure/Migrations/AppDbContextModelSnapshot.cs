@@ -23,7 +23,7 @@ namespace ParkingTicketsManagement.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("ParkingTicektsManagment.Domain.Domains.Location", b =>
+            modelBuilder.Entity("ParkingTicketsManagment.Domain.Domains.Location", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -53,7 +53,7 @@ namespace ParkingTicketsManagement.Infrastructure.Migrations
                     b.ToTable("Locations");
                 });
 
-            modelBuilder.Entity("ParkingTicektsManagment.Domain.Domains.ParkingTicket", b =>
+            modelBuilder.Entity("ParkingTicketsManagment.Domain.Domains.ParkingTicket", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -94,7 +94,7 @@ namespace ParkingTicketsManagement.Infrastructure.Migrations
                     b.ToTable("ParkingTickets");
                 });
 
-            modelBuilder.Entity("ParkingTicektsManagment.Domain.Domains.Payment", b =>
+            modelBuilder.Entity("ParkingTicketsManagment.Domain.Domains.Payment", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -121,7 +121,7 @@ namespace ParkingTicketsManagement.Infrastructure.Migrations
                     b.ToTable("Payments");
                 });
 
-            modelBuilder.Entity("ParkingTicektsManagment.Domain.Domains.SubscriptionTicket", b =>
+            modelBuilder.Entity("ParkingTicketsManagment.Domain.Domains.SubscriptionTicket", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -151,7 +151,7 @@ namespace ParkingTicketsManagement.Infrastructure.Migrations
                     b.ToTable("SubscriptionTickets");
                 });
 
-            modelBuilder.Entity("ParkingTicektsManagment.Domain.Domains.User", b =>
+            modelBuilder.Entity("ParkingTicketsManagment.Domain.Domains.User", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -185,7 +185,7 @@ namespace ParkingTicketsManagement.Infrastructure.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ParkingTicektsManagment.Domain.Domains.Vehicle", b =>
+            modelBuilder.Entity("ParkingTicketsManagment.Domain.Domains.Vehicle", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -216,7 +216,7 @@ namespace ParkingTicketsManagement.Infrastructure.Migrations
                     b.ToTable("Vehicles");
                 });
 
-            modelBuilder.Entity("ParkingTicektsManagment.Domain.Domains.Zone", b =>
+            modelBuilder.Entity("ParkingTicketsManagment.Domain.Domains.Zone", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -239,9 +239,9 @@ namespace ParkingTicketsManagement.Infrastructure.Migrations
                     b.ToTable("Zones");
                 });
 
-            modelBuilder.Entity("ParkingTicektsManagment.Domain.Domains.Location", b =>
+            modelBuilder.Entity("ParkingTicketsManagment.Domain.Domains.Location", b =>
                 {
-                    b.HasOne("ParkingTicektsManagment.Domain.Domains.Zone", "Zone")
+                    b.HasOne("ParkingTicketsManagment.Domain.Domains.Zone", "Zone")
                         .WithMany("Locations")
                         .HasForeignKey("ZoneId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -250,21 +250,21 @@ namespace ParkingTicketsManagement.Infrastructure.Migrations
                     b.Navigation("Zone");
                 });
 
-            modelBuilder.Entity("ParkingTicektsManagment.Domain.Domains.ParkingTicket", b =>
+            modelBuilder.Entity("ParkingTicketsManagment.Domain.Domains.ParkingTicket", b =>
                 {
-                    b.HasOne("ParkingTicektsManagment.Domain.Domains.Location", "Location")
+                    b.HasOne("ParkingTicketsManagment.Domain.Domains.Location", "Location")
                         .WithMany("ParkingTickets")
                         .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("ParkingTicektsManagment.Domain.Domains.Vehicle", "Vehicle")
+                    b.HasOne("ParkingTicketsManagment.Domain.Domains.Vehicle", "Vehicle")
                         .WithMany("ParkingTickets")
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("ParkingTicektsManagment.Domain.Domains.User", "Worker")
+                    b.HasOne("ParkingTicketsManagment.Domain.Domains.User", "Worker")
                         .WithMany("IssuedTickets")
                         .HasForeignKey("WorkerId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -277,9 +277,9 @@ namespace ParkingTicketsManagement.Infrastructure.Migrations
                     b.Navigation("Worker");
                 });
 
-            modelBuilder.Entity("ParkingTicektsManagment.Domain.Domains.Payment", b =>
+            modelBuilder.Entity("ParkingTicketsManagment.Domain.Domains.Payment", b =>
                 {
-                    b.HasOne("ParkingTicektsManagment.Domain.Domains.ParkingTicket", "ParkingTicket")
+                    b.HasOne("ParkingTicketsManagment.Domain.Domains.ParkingTicket", "ParkingTicket")
                         .WithMany("Payments")
                         .HasForeignKey("ParkingTicketId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -288,15 +288,15 @@ namespace ParkingTicketsManagement.Infrastructure.Migrations
                     b.Navigation("ParkingTicket");
                 });
 
-            modelBuilder.Entity("ParkingTicektsManagment.Domain.Domains.SubscriptionTicket", b =>
+            modelBuilder.Entity("ParkingTicketsManagment.Domain.Domains.SubscriptionTicket", b =>
                 {
-                    b.HasOne("ParkingTicektsManagment.Domain.Domains.Vehicle", "Vehicle")
+                    b.HasOne("ParkingTicketsManagment.Domain.Domains.Vehicle", "Vehicle")
                         .WithMany("SubscriptionTickets")
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("ParkingTicektsManagment.Domain.Domains.Zone", "Zone")
+                    b.HasOne("ParkingTicketsManagment.Domain.Domains.Zone", "Zone")
                         .WithMany("SubscriptionTickets")
                         .HasForeignKey("ZoneId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -307,9 +307,9 @@ namespace ParkingTicketsManagement.Infrastructure.Migrations
                     b.Navigation("Zone");
                 });
 
-            modelBuilder.Entity("ParkingTicektsManagment.Domain.Domains.Vehicle", b =>
+            modelBuilder.Entity("ParkingTicketsManagment.Domain.Domains.Vehicle", b =>
                 {
-                    b.HasOne("ParkingTicektsManagment.Domain.Domains.User", "User")
+                    b.HasOne("ParkingTicketsManagment.Domain.Domains.User", "User")
                         .WithMany("Vehicles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -318,31 +318,31 @@ namespace ParkingTicketsManagement.Infrastructure.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("ParkingTicektsManagment.Domain.Domains.Location", b =>
+            modelBuilder.Entity("ParkingTicketsManagment.Domain.Domains.Location", b =>
                 {
                     b.Navigation("ParkingTickets");
                 });
 
-            modelBuilder.Entity("ParkingTicektsManagment.Domain.Domains.ParkingTicket", b =>
+            modelBuilder.Entity("ParkingTicketsManagment.Domain.Domains.ParkingTicket", b =>
                 {
                     b.Navigation("Payments");
                 });
 
-            modelBuilder.Entity("ParkingTicektsManagment.Domain.Domains.User", b =>
+            modelBuilder.Entity("ParkingTicketsManagment.Domain.Domains.User", b =>
                 {
                     b.Navigation("IssuedTickets");
 
                     b.Navigation("Vehicles");
                 });
 
-            modelBuilder.Entity("ParkingTicektsManagment.Domain.Domains.Vehicle", b =>
+            modelBuilder.Entity("ParkingTicketsManagment.Domain.Domains.Vehicle", b =>
                 {
                     b.Navigation("ParkingTickets");
 
                     b.Navigation("SubscriptionTickets");
                 });
 
-            modelBuilder.Entity("ParkingTicektsManagment.Domain.Domains.Zone", b =>
+            modelBuilder.Entity("ParkingTicketsManagment.Domain.Domains.Zone", b =>
                 {
                     b.Navigation("Locations");
 

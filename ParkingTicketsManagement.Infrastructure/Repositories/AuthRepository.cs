@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ParkingTicektsManagment.Domain.Domains;
-using ParkingTicektsManagment.Domain.Repositories;
+using ParkingTicketsManagment.Domain.Domains;
+using ParkingTicketsManagment.Domain.Repositories;
 using ParkingTicketsManagement.Infrastructure.Data;
 using System;
 using System.Collections.Generic;

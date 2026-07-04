@@ -5,7 +5,7 @@ using System.Text;
 using NetTopologySuite.Geometries;
 
 
-namespace ParkingTicektsManagment.Domain.Domains
+namespace ParkingTicketsManagment.Domain.Domains
 {
     public class Location
     {

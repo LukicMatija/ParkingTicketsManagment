@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ParkingTicektsManagment.Domain.Domains;
+using ParkingTicketsManagment.Domain.Domains;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
-namespace ParkingTicektsManagment.Domain.Domains
+namespace ParkingTicketsManagment.Domain.Domains
 {
     public class SubscriptionTicket
     {

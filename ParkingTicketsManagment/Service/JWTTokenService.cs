@@ -1,6 +1,6 @@
 ﻿using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
-using ParkingTicektsManagment.Domain.Domains;
+using ParkingTicketsManagment.Domain.Domains;
 using System.Security.Claims;
 using System.Text;
 
