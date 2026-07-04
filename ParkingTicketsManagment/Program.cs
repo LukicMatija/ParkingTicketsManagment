@@ -1,11 +1,13 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
-using ParkingTicektsManagment.Domain.Repositories;
+using Microsoft.IdentityModel.Tokens;
 using ParkingTicketsManagement.Infrastructure;
 using ParkingTicketsManagement.Infrastructure.Data;
+using ParkingTicketsManagment.Domain.Repositories;
+using ParkingTicketsManagment.Infrastructure.Features.User.Commands;
 using ParkingTicketsManagment.Service;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
-using Microsoft.IdentityModel.Tokens;
+
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(options =>
@@ -20,6 +22,7 @@ builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped<JWTTokenService>();
 builder.Services.AddScoped<PassHasher>();
 
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(UpdateUserRoleCommand).Assembly));
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi

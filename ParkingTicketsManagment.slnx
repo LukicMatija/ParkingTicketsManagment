@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="ParkingTicektsManagment.Domain/ParkingTicektsManagment.Domain.csproj" />
+  <Project Path="ParkingTicektsManagment.Domain/ParkingTicketsManagment.Domain.csproj" />
   <Project Path="ParkingTicketsManagement.Infrastructure/ParkingTicketsManagement.Infrastructure.csproj" Id="2bb5c8b6-5867-44f8-a5f1-80f48ad86635" />
   <Project Path="ParkingTicketsManagment/ParkingTicketsManagment.csproj" />
 </Solution>
