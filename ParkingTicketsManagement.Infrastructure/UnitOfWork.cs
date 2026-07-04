@@ -13,6 +13,7 @@ namespace ParkingTicketsManagement.Infrastructure
 
         private IAuthRepository? _auth;
         private IUserRepository? _users;
+        private IZoneRepository? _zones;
 
         public UnitOfWork(AppDbContext context)
         {
@@ -23,6 +24,8 @@ namespace ParkingTicketsManagement.Infrastructure
             _auth ??= new AuthRepository(_context);
         public IUserRepository Users =>
             _users ??= new UserRepository(_context);
+        public IZoneRepository Zones =>
+            _zones ??= new ZoneRepository(_context);
         public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
 
         public void Dispose() => _context.Dispose();
