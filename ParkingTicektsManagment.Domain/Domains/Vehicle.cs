@@ -10,7 +10,7 @@ namespace ParkingTicketsManagment.Domain.Domains
         public Guid Id { get; set; }
 
         [Required]
-        [RegularExpression(@"^[A-Z]{2}-d{3,5}-[A-Z]{2}$", ErrorMessage = "Invalid license plate format.")]
+        [RegularExpression(@"^[A-Z]{2}-\d{3,5}-[A-Z]{2}$", ErrorMessage = "Invalid license plate format.")]
         [StringLength(20)]
         public string LicensePlate { get; set; } = string.Empty;
 
