@@ -9,6 +9,7 @@ namespace ParkingTicketsManagment.Domain.Repositories
         IAuthRepository Auth {  get; }
         IUserRepository Users { get; }
         IZoneRepository Zones { get; }
+        ISubscriptionTicketRepository SubscriptionTickets { get; }
         Task<int> SaveChangesAsync();
     }
 }

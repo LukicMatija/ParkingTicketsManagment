@@ -5,8 +5,8 @@ using System.Text;
 
 namespace ParkingTicketsManagment.Domain.Repositories
 {
-    public interface IZoneRepository : IRepository<Zone>
+    public interface ISubscriptionTicketRepository : IRepository<SubscriptionTicket>
     {
-        Task<Zone?> FindByPoint(double latitude, double longitude);
+        Task<bool> IsSubsTicketValid(Guid idVehicle, Guid idZone);
     }
 }
