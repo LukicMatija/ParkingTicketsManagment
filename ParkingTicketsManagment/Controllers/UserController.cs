@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using ParkingTicketsManagement.Infrastructure.Features.User.Queries;
 using ParkingTicketsManagment.Domain.Domains;
 using ParkingTicketsManagment.Infrastructure.Features.User.Commands;
 
@@ -37,6 +38,23 @@ namespace ParkingTicketsManagment.Controllers
                     userId = updatedUserId,
                     message = $"Role changed on {newRole}."
                 });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                var query = new GetAllUsersQuery();
+                var users = await _mediator.Send(query);
+
+                return Ok(users);
             }
             catch (Exception ex)
             {
