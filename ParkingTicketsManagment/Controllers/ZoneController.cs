@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ParkingTicketsManagement.Infrastructure.Features.Zones.Commands;
+using ParkingTicketsManagement.Infrastructure.Features.Zones.Queries;
 using ParkingTicketsManagment.Infrastructure.DTOs.ZoneDTOs;
 
 namespace ParkingTicketsManagment.Controllers
@@ -43,6 +44,23 @@ namespace ParkingTicketsManagment.Controllers
                 return BadRequest(new { message = ex.Message });
             }
 
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet]
+        public async Task<IActionResult> GetAll()
+        {
+            try
+            {
+                var query = new GetAllZonesQuery();
+                var zones = await _mediator.Send(query);
+
+                return Ok(zones);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
         }
     }
 }
