@@ -13,6 +13,7 @@ namespace ParkingTicketsManagement.Infrastructure
 
         private IAuthRepository? _auth;
         private IUserRepository? _users;
+        private IVehicleRepository? _vehicles;
         private IZoneRepository? _zones;
         private ISubscriptionTicketRepository? _subscriptionTickets;
 
@@ -25,6 +26,11 @@ namespace ParkingTicketsManagement.Infrastructure
             _auth ??= new AuthRepository(_context);
         public IUserRepository Users =>
             _users ??= new UserRepository(_context);
+        public IVehicleRepository Vehicles =>
+            _vehicles ??= new VehicleRepository(_context);
+
+     
+
         public IZoneRepository Zones =>
             _zones ??= new ZoneRepository(_context);
         public ISubscriptionTicketRepository SubscriptionTickets =>
