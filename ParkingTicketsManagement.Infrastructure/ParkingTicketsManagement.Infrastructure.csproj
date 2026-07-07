@@ -19,4 +19,8 @@
 		<ProjectReference Include="..\ParkingTicektsManagment.Domain\ParkingTicketsManagment.Domain.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Features\ParkingTickets\Query\" />
+	</ItemGroup>
+
 </Project>
