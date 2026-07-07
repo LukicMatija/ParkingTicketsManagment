@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ParkingTicketsManagement.Infrastructure.DTOs.ParkingTicketDTOs;
 using ParkingTicketsManagement.Infrastructure.Features.ParkingTickets.Commands;
+using ParkingTicketsManagement.Infrastructure.Features.ParkingTickets.Query;
 using System.Security.Claims;
 
 namespace ParkingTicketsManagment.Controllers
@@ -19,7 +20,7 @@ namespace ParkingTicketsManagment.Controllers
         {
             _mediator = mediator;
         }
-
+        [Authorize(Roles = "Worker")]
         [HttpPost]
         public async Task<IActionResult> IssueTicket([FromBody] AddParkingTicketDto dto)
         {
@@ -36,6 +37,21 @@ namespace ParkingTicketsManagment.Controllers
                 var ticketId = await _mediator.Send(command);
 
                 return Ok(new { id = ticketId, message = "Ticket successfully issued and processed." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("vehicle/{vehicleId}")]
+        public async Task<IActionResult> GetTicketsForVehicle([FromRoute] Guid vehicleId)
+        {
+            try
+            {
+                var query = new GetTicketsForVehicleQuery(vehicleId);
+                var result = await _mediator.Send(query);
+                return Ok(result);
             }
             catch (Exception ex)
             {

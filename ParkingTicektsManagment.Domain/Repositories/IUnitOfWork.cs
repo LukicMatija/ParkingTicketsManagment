@@ -14,6 +14,7 @@ namespace ParkingTicketsManagment.Domain.Repositories
         IParkingTicketRepository ParkingTickets { get; }
         ILocationRepository Locations { get; }
         IViolationTypeRepository ViolationTypes { get; }
+        IPaymentRepository Payments { get; }
         Task<int> SaveChangesAsync();
         
     }

@@ -16,12 +16,24 @@ namespace ParkingTicketsManagement.Infrastructure.Repositories
 
         public async Task<List<ParkingTicket>> getTicketsForUser(Guid UserId)
         {
-            return await DbSet.Include(pt => pt.Vehicle).Where(pt => pt.Vehicle.UserId == UserId).ToListAsync();
+            return await DbSet
+                .Include(pt => pt.Vehicle)
+                .Include(pt => pt.ViolationType)
+                .Include(pt => pt.Location)
+                .Include(pt => pt.Worker)
+                .Where(pt => pt.Vehicle.UserId == UserId)
+                .ToListAsync();
         }
 
         public async Task<List<ParkingTicket>> getTicketsForVehicle(Guid VehicleId)
         {
-            return await DbSet.Where(pt => pt.VehicleId == VehicleId).ToListAsync();
+            return await DbSet
+                .Include(pt => pt.Vehicle)
+                .Include(pt => pt.ViolationType)
+                .Include(pt => pt.Location)
+                .Include(pt => pt.Worker)
+                .Where(pt => pt.VehicleId == VehicleId)
+                .ToListAsync();
         }
 
         //Ako vrati false moze da se izda karta
