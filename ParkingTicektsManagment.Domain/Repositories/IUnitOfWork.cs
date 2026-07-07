@@ -11,6 +11,9 @@ namespace ParkingTicketsManagment.Domain.Repositories
         IZoneRepository Zones { get; }
         ISubscriptionTicketRepository SubscriptionTickets{ get; }
         IVehicleRepository Vehicles{ get; }
+        IParkingTicketRepository ParkingTickets { get; }
+        ILocationRepository Locations { get; }
+        IViolationTypeRepository ViolationTypes { get; }
         Task<int> SaveChangesAsync();
         
     }

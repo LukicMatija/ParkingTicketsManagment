@@ -16,6 +16,9 @@ namespace ParkingTicketsManagement.Infrastructure
         private IVehicleRepository? _vehicles;
         private IZoneRepository? _zones;
         private ISubscriptionTicketRepository? _subscriptionTickets;
+        private IParkingTicketRepository? _parkingTickets;
+        private ILocationRepository? _locations;
+        private IViolationTypeRepository? _violationTypes;
 
         public UnitOfWork(AppDbContext context)
         {
@@ -28,13 +31,16 @@ namespace ParkingTicketsManagement.Infrastructure
             _users ??= new UserRepository(_context);
         public IVehicleRepository Vehicles =>
             _vehicles ??= new VehicleRepository(_context);
-
-     
-
         public IZoneRepository Zones =>
             _zones ??= new ZoneRepository(_context);
         public ISubscriptionTicketRepository SubscriptionTickets =>
             _subscriptionTickets ??= new SubscriptionTicketRepository(_context);
+        public IParkingTicketRepository ParkingTickets =>
+            _parkingTickets ??= new ParkingTicketRepository(_context);
+        public ILocationRepository Locations =>
+            _locations ??= new LocationRepository(_context);
+        public IViolationTypeRepository ViolationTypes =>
+            _violationTypes ??= new ViolationTypeRepository(_context);
         public async Task<int> SaveChangesAsync() => await _context.SaveChangesAsync();
 
         public void Dispose() => _context.Dispose();
