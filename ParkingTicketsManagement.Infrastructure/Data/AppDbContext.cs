@@ -15,6 +15,7 @@ namespace ParkingTicketsManagement.Infrastructure.Data
         public DbSet<Payment>Payments { get; set; }
         public DbSet<ParkingTicket>ParkingTickets { get; set; }
         public DbSet<Location>Locations { get; set; }
+        public DbSet<ViolationType> ViolationTypes { get; set; }
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
@@ -23,6 +24,19 @@ namespace ParkingTicketsManagement.Infrastructure.Data
             base.OnModelCreating(modelBuilder);
 
 
+            modelBuilder.Entity<ViolationType>(entity =>
+            {
+                entity.HasKey(vt => vt.Id);
+
+                entity.Property(vt => vt.Name).IsRequired().HasMaxLength(100);
+                entity.Property(vt => vt.Description).IsRequired().HasMaxLength(500);
+                entity.Property(vt => vt.Amount).HasColumnType("decimal(18,2)").IsRequired();
+
+                entity.HasMany(vt => vt.ParkingTickets)
+                .WithOne(pt => pt.ViolationType)
+                .HasForeignKey(pt => pt.ViolationTypeId)
+                .OnDelete(DeleteBehavior.Cascade);
+            });
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(u => u.Id);

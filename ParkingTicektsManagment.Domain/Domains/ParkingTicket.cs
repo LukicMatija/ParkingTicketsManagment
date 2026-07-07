@@ -33,7 +33,10 @@ namespace ParkingTicketsManagment.Domain.Domains
 
         [Required]
         public Guid WorkerId { get; set; }
+        [Required]
+        public Guid ViolationTypeId;
 
+        public ViolationType ViolationType { get; set; } = null;
         public Vehicle Vehicle { get; set; } = null!;
         public Location Location { get; set; } = null!;
 
