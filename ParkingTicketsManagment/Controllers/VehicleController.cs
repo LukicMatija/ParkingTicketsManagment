@@ -61,13 +61,36 @@ namespace ParkingTicketsManagment.Controllers
                 return BadRequest(new { message = e.Message });
             }
         }
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> Delete([FromRoute] Guid id)
         {
             try
             {
                 var deletedId = await _mediator.Send(new DeleteVehicleCommand(id));
                 return Ok(new { id = deletedId, message = "Vozilo obrisano." });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        [HttpGet("my-vehicles")]
+        public async Task<IActionResult> GetMyVehicles()
+        {
+            try
+            {
+                var userIdClaim = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+
+                if (string.IsNullOrEmpty(userIdClaim) || !Guid.TryParse(userIdClaim, out Guid userId))
+                {
+                    return Unauthorized(new { message = "User isnt detected" });
+                }
+
+                var query = new GetVehiclesForUserQuery(userId);
+                var vehicles = await _mediator.Send(query);
+
+                return Ok(vehicles);
             }
             catch (Exception ex)
             {

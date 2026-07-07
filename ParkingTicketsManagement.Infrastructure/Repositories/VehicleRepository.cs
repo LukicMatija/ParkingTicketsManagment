@@ -1,4 +1,5 @@
-﻿using ParkingTicketsManagement.Infrastructure.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using ParkingTicketsManagement.Infrastructure.Data;
 using ParkingTicketsManagment.Domain.Domains;
 using ParkingTicketsManagment.Domain.Repositories;
 using System;
@@ -11,6 +12,12 @@ namespace ParkingTicketsManagement.Infrastructure.Repositories
     {
         public VehicleRepository(AppDbContext context) : base(context)
         {
+
+        }
+
+        public async Task<List<Vehicle>> getAllVehiclesForUserAsync(Guid UserId)
+        {
+            return await DbSet.Where(v => v.UserId == UserId).ToListAsync();
         }
     }
 }

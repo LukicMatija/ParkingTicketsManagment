@@ -7,6 +7,6 @@ namespace ParkingTicketsManagment.Domain.Repositories
 {
     public interface IVehicleRepository:IRepository<Vehicle>
     {
-
+        Task<List<Vehicle>> getAllVehiclesForUserAsync(Guid UserId);
     }
 }
