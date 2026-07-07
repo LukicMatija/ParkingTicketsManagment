@@ -38,6 +38,13 @@ namespace ParkingTicketsManagement.Infrastructure.Features.Zones.Commands
                 koordinate = zatvoreneKoordinate;
             }
 
+            var linearRing = geometryFactory.CreateLinearRing(koordinate);
+
+            if (!linearRing.IsCCW)
+            {
+                koordinate = koordinate.Reverse().ToArray();
+            }
+
             Polygon p = geometryFactory.CreatePolygon(koordinate);
             z.ZoneBoundaries = p;
             z.Id = Guid.NewGuid();

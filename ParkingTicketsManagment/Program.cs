@@ -16,6 +16,21 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         x => x.UseNetTopologySuite() 
     ));
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy.WithOrigins(
+                "http://localhost:8080",
+                "http://localhost:3000",
+                "http://localhost:5173"
+              )
+              .AllowAnyHeader()
+              .AllowAnyMethod()
+              .AllowCredentials();
+    });
+});
+
 // Add services to the container.
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
@@ -60,6 +75,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
 app.UseAuthorization();

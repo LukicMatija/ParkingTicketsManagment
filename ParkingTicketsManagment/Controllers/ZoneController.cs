@@ -8,6 +8,7 @@ using ParkingTicketsManagment.Infrastructure.DTOs.ZoneDTOs;
 
 namespace ParkingTicketsManagment.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ZoneController : ControllerBase
@@ -46,7 +47,6 @@ namespace ParkingTicketsManagment.Controllers
 
         }
 
-        [Authorize(Roles = "Admin")]
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
