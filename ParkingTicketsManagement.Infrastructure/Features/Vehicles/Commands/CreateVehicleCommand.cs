@@ -18,6 +18,11 @@ namespace ParkingTicketsManagement.Infrastructure.Features.Vehicles.Commands
         }
         public async Task<Guid> Handle(CreateVehicleCommand request, CancellationToken cancellationToken)
         {
+            var v = await _unitOfWork.Vehicles.GetAllAsync();
+            if(v.Any(v => v.LicensePlate == request.LicensePlate))
+            {
+                throw new Exception("Licence plate exists");
+            }
             var vehicle = new Vehicle
             {
                 Id = Guid.NewGuid(),
