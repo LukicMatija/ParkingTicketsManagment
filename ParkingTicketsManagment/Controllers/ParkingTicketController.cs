@@ -58,5 +58,19 @@ namespace ParkingTicketsManagment.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetTicketsForUser([FromRoute] Guid userId)
+        {
+            try
+            {
+                var query = new GetTicketsForUserQuery(userId);
+                var result = await _mediator.Send(query);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }
